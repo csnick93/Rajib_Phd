@@ -56,6 +56,7 @@ while (1):
     cv2.imshow('image', img)
     k = cv2.waitKey(1) & 0xFF
     if k == ord('q'):
+        # stop the annotation
         break
     elif k == ord('f'):
         # finish current polygon
@@ -71,6 +72,7 @@ while (1):
         filename = os.path.join(save_folder, 'seg_mask_%i.npy'%im_ctr)
         np.save(filename, segmask)
     elif k == ord('n'):
+        # jump to next image in folder
         if im_ctr == len(input_imgs)-1:
             im_ctr = 0
         else:
