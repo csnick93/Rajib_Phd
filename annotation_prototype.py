@@ -1,5 +1,4 @@
 import cv2
-from PIL import Image
 from tqdm import tqdm
 import os
 import numpy as np
@@ -14,7 +13,6 @@ def draw_polygon(event, x, y, flags, param):
     if event == cv2.EVENT_LBUTTONDOWN:
         polygon_in_drawing.append((x, y))
     elif event == cv2.EVENT_LBUTTONUP:
-        import pdb; pdb.set_trace()
         if len(polygon_in_drawing) > 1:
             cv2.line(img, polygon_in_drawing[-2], polygon_in_drawing[-1],
                      (0, 255, 0), 2)
@@ -52,7 +50,7 @@ cv2.namedWindow('image')
 cv2.setMouseCallback('image', draw_polygon)
 im_ctr = 0
 im_file = os.path.join(input_img_folder, input_imgs[im_ctr])
-img = np.asarray(Image.open(im_file))[:,:,::-1]
+img = cv2.imread(im_file)
 
 while (1): 
     cv2.imshow('image', img)
@@ -78,5 +76,5 @@ while (1):
         else:
             im_ctr += 1
         im_file = os.path.join(input_img_folder, input_imgs[im_ctr])
-        img = np.asarray(Image.open(im_file))[:,:,::-1]
-cv2.destroyAllWindows()
+        img = cv2.imread(im_file)
+
